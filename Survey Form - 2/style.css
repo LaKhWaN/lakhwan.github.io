@@ -98,3 +98,7 @@ textarea:focus{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.btn:hover{
+    background-color: rgb(14, 160, 50);
+    transform: scale(1.05) perspective(1px)
+}

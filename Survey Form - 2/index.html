@@ -10,25 +10,25 @@
     <title>Survey Form</title>
 </head>
 <body>
-    <form action="">
-        <h1>freeCodeCamp Survey Form</h1>
+    <form action=" id="survey-form"">
+        <h1 id="title">freeCodeCamp Survey Form</h1>
         <div class ="small-text">
-            <i>Thank you for taking the time to help us improve the platform</i>
+            <i id="description">Thank you for taking the time to help us improve the platform</i>
         </div>
         <br>
         <div class="container">
             <label>Name</label>
-            <input class="streched" type="text" placeholder="Enter your Name here">
+            <input id="name" class="streched" type="text" placeholder="Enter your Name here">
             <br><br><br>
             <label>Email</label>
-            <input class="streched" type="email" placeholder="Enter your Email here">
+            <input id="email" class="streched" type="email" placeholder="Enter your Email here">
             <br><br><br>
             <label>Age (optional)</label>
-            <input class="streched" type="number" placeholder="Age">
+            <input min="10" max="100" id="number" class="streched" type="number" placeholder="Age">
             <br><br><br>
             <label>Which option best describes your current role?</label>
             <br><br>
-            <select>
+            <select id="dropdown">
                 <option value="">Select current role</option>    
                 <option value="">Full time job</option>    
                 <option value="">Full time learner</option>    
@@ -82,7 +82,7 @@
             <label>Any comments or suggestions?</label>
             <br><br>
             <textarea placeholder="Enter your comment here..." name="" id="" class='txt-area'></textarea>
-            <button class="btn"><span>Submit</span></button>
+            <button id="submit" class="btn"><span>Submit</span></button>
         </div>
     </form>
     <br><br><br>
