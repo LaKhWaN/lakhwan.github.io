@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Hunt | Set-1 Riddle-1</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../function.js"></script>
+    <script> 
+        function checkAns(){
+            if(document.getElementById('ans').value == "" || document.getElementById('ans').value != riddles.set2r2){
+                document.getElementById("error").innerHTML = "Incorrect Answer";
+            }
+            else{
+                document.getElementById("body").innerHTML = card("Set 2","Riddle 2");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <ul>
+                <div class="navbar-item">
+                    <li>
+                        <h2 class="center">CGC - Tech Hunt 💻 - Riddle 😕</h2>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-body" id="body">
+                <!-- <form method="post"> -->
+                    <h3>Answer of previous riddle</h3>
+                    <input id="ans" placeholder="Answer" type="text">
+                    <input onclick="checkAns()" class="btn" type="submit" value="Submit ✔">
+                    <div id="error"></div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
