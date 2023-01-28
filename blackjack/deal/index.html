@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <title>Blackjack</title>
+</head>
+<body>
+   <h1>Blackjack</h1>
+    <h2>You: <span id="myCard"></span> (Total: <span id="myCardTotal"></span>)</h2>
+    <h2>Dealer: <span id="dealerCard"></span> (Total: <span id="dealerCardTotal"></span>)</h2>
+    <h3>Result: <span class="result" id="result">Dealing...</span></h3>
+    <div class="row">
+        <div class="col-md-6">
+            <button onclick="dealMyCard()" id="hitBtn" class="big-button">Hit</button>
+        </div>
+        <div class="col-md-6">
+            <button onclick="stand()" id="standBtn" class="big-button">Stand</button>
+        </div>
+    </div>
+    <br>
+   <button onclick="reset()" id="resetBtn" class="big-button-reset">RESET</button>
+</body>
+<script>
+    async function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    var myCard = document.getElementById("myCard");
+    var dealerCard = document.getElementById("dealerCard");
+    var myCardTotal = document.getElementById("myCardTotal");
+    var dealerCardTotal = document.getElementById("dealerCardTotal");
+    var dealerFlag = 0;
+    setTimeout(dealMyCard,1000);
+    setTimeout(dealMyCard(),2000);
+    
+    function dealMyCard()
+    {
+        max = 11
+        min = 1
+        var number = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log("Card: ",number)
+        
+        if(myCard.innerText != "") myCard.innerText = myCard.innerText + ", " + number;
+        else myCard.innerText = number;
+        
+        if(myCardTotal.innerText != "") myCardTotal.innerText = parseInt(myCardTotal.innerText) + parseInt(number);
+        else myCardTotal.innerText = parseInt(number);
+
+        if(parseInt(myCardTotal.innerText) == 21){
+            document.getElementById("hitBtn").disabled = true;
+            document.getElementById("standBtn").disabled = true;
+            document.getElementById("result").innerText = "BLACKJACK!";
+            document.getElementById("result").style = "color: #1B7E48;";
+        }
+        else if(parseInt(myCardTotal.innerText) > 21 ){
+            document.getElementById("hitBtn").disabled = true;
+            document.getElementById("result").innerText = "BUSTED!";
+            document.getElementById("result").style = "color: #cc2525;";
+        }
+    }
+    function dealDealerCard()
+    {
+        max = 11
+        min = 1
+        var number = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log("Card: ",number);
+
+        if(dealerCard.innerText != "") dealerCard.innerText = dealerCard.innerText + ", " + number;
+        else dealerCard.innerText = number;
+        
+        if(dealerCardTotal.innerText != "") dealerCardTotal.innerText = parseInt(dealerCardTotal.innerText) + parseInt(number);
+        else dealerCardTotal.innerText = parseInt(number);
+
+        if(parseInt(dealerCardTotal.innerText) > 21){
+            document.getElementById("hitBtn").disabled = true;
+            document.getElementById("standBtn").disabled = true;
+            document.getElementById("result").innerText = "WON!";
+            document.getElementById("result").style = "color: #1B7E48;";
+            dealerFlag = 1;
+        }
+        else if(parseInt(dealerCardTotal.innerText) > parseInt(myCardTotal.innerHTML) ){
+            document.getElementById("hitBtn").disabled = true;
+            document.getElementById("result").innerText = "LOST!";
+            document.getElementById("result").style = "color: #cc2525;";
+            dealerFlag = 1;
+        }
+    }
+    async function stand()
+    {
+        document.getElementById("hitBtn").disabled = true;
+        while(dealerFlag != 1){
+            await sleep(1000);
+            dealDealerCard();
+        }
+    }
+
+    function reset()
+    {
+        myCard.innerText = "";
+        myCardTotal.innerText = "";
+        dealerCard.innerText = "";
+        dealerCardTotal.innerText = "";
+
+        dealMyCard();
+        setTimeout(dealMyCard,500);
+
+        document.getElementById("result").innerText = "Dealing...";
+        document.getElementById("result").style = "color;#DEF2F1";
+
+        document.getElementById("hitBtn").disabled = false;
+        document.getElementById("standBtn").disabled = false;
+
+        dealerFlag = 0;
+    }
+
+    
+
+</script>
+</html> 
