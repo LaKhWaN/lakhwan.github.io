@@ -60,6 +60,7 @@
         }
         else if(parseInt(myCardTotal.innerText) > 21 ){
             document.getElementById("hitBtn").disabled = true;
+            document.getElementById("standBtn").disabled = true;
             document.getElementById("result").innerText = "BUSTED!";
             document.getElementById("result").style = "color: #cc2525;";
         }
